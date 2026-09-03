@@ -1,0 +1,8 @@
+ATLAS_MEMORY_HOST=127.0.0.1
+ATLAS_MEMORY_PORT=8791
+ATLAS_MEMORY_DB=/var/lib/atlas-memory/atlas-memory.sqlite
+ATLAS_MEMORY_PRINCIPALS=/etc/atlas-memory/principals.json
+# ATLAS_EMBEDDING_BASE_URL=https://integrate.api.nvidia.com/v1
+# ATLAS_EMBEDDING_MODEL=nvidia/nemotron-3-embed-1b
+# ATLAS_EMBEDDING_API_KEY=<store only in the protected installed environment file>
+# ATLAS_EMBEDDING_TIMEOUT_MS=1500

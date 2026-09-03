@@ -1,0 +1,22 @@
+[Unit]
+Description=Applied AI Solutions Atlas Memory
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=openclaw
+Group=openclaw
+WorkingDirectory=/opt/applied-ai/atlas-memory
+EnvironmentFile=/etc/atlas-memory/environment
+ExecStart=/usr/bin/node /opt/applied-ai/atlas-memory/src/server.mjs
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/atlas-memory
+
+[Install]
+WantedBy=multi-user.target

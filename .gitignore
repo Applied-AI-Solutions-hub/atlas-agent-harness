@@ -1,0 +1,77 @@
+# Credentials and local environment
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.pfx
+*.p12
+secrets/
+prototype/memory-layer/config/principals.json
+prototype/memory-layer/data/
+
+# OpenClaw runtime state
+.openclaw/
+openclaw.json
+openclaw.json.bak
+
+# Recovery archives and generated verification output
+prototype/backups/
+prototype/verify-recovery/
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.tools/
+__pycache__/
+*.pyc
+publish-openclaw-agent-harness/
+*.log
+.bitlocker-status.txt
+
+# Installed dependencies and machine-specific handoff artifacts
+node_modules/
+prototype/home-node/incoming/
+prototype/home-node/outbox/
+prototype/report-bridge/reports/
+prototype/home-gpu-worker/*.remote.json
+prototype/home-gpu-worker/results/
+prototype/work-graph/results/
+
+# Private deployment evidence and machine-specific control material
+handoffs/
+prototype/diagnostics/
+prototype/boot/lean/
+prototype/boot/atlas-lean/
+prototype/boot/previous-*/
+prototype/collaboration/
+prototype/home-node/*.json
+prototype/home-node/Send-*.ps1
+prototype/home-node/Receive-*.ps1
+prototype/home-node/Return-*.ps1
+prototype/home-node/HomeWorkspace.ps1
+prototype/home-node/CODEX-CROSS-PC-WORKFLOW.md
+prototype/home-node/HOME-CODEX-TASK.md
+prototype/home-node/EXECUTOR-BRIEF*.md
+prototype/home-node/EXECUTOR-PROTOCOL.md
+prototype/home-node/START-HERE*.md
+prototype/home-node/ATLAS-WORKSPACE.md
+
+# Local machine provisioning and retired routing experiments are not release artifacts
+prototype/home-node/
+prototype/openclaw-plugin-sparky-compute/
+prototype/tools/compute-router.mjs
+prototype/tools/compute-router.test.mjs
+prototype/tools/compute-dispatcher.mjs
+prototype/tools/compute-dispatcher.test.mjs
+openclaw-install.ps1
+
+# Live configuration patches contain installation-specific account and channel IDs
+*.batch.json
+*.patch.json5

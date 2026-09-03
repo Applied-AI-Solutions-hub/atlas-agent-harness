@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "default": {
+    "capability": "reasoning.standard",
+    "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "maxOutputTokens": 4096,
+    "reason": "Low-latency, low-token default for ordinary conversation and tool use."
+  },
+  "escalation": [
+    {
+      "capability": "reasoning.complex",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "maxOutputTokens": 8192,
+      "production": false,
+      "requires": ["explicit complex-task classification", "bounded task", "Discord validation pending"],
+      "reason": "Use for multi-source synthesis or planning that fails the standard route."
+    },
+    {
+      "capability": "reasoning.critical",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b",
+      "maxOutputTokens": 8192,
+      "production": false,
+      "requires": ["explicit owner approval", "high-consequence task", "Discord validation pending"],
+      "reason": "Slow, expensive route reserved for explicitly approved high-consequence work."
+    }
+  ],
+  "rules": {
+    "neverEscalateBecauseResponseIsSlow": true,
+    "neverRetryIdenticalPromptMoreThan": 2,
+    "neverUseModelSizeAsAQualityProof": true,
+    "recordRequestedAndEffectiveModel": true,
+    "discloseFallbackOrEscalation": true,
+    "returnToDefaultAfterJob": true
+  }
+}

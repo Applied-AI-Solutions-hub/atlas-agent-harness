@@ -1,0 +1,13 @@
+{
+  "name": "@applied-ai-solutions/work-graph",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Durable, budgeted work graph for Sparky, Atlas, hosted models, and private GPU workers.",
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

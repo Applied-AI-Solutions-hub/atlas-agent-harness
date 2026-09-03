@@ -1,0 +1,16 @@
+[Unit]
+Description=Applied AI Home GPU work-graph worker
+After=ollama.service
+Requires=ollama.service
+
+[Service]
+Type=oneshot
+Environment=APPLIED_AI_QUIET_IDLE=1
+ExecStart=/opt/node-v24.20.0-linux-x64/bin/node %h/workspace/infrastructure/work-graph/src/home-gpu-worker.mjs
+TimeoutStartSec=150
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.local/share/applied-ai %h/workspace/results/work-graph

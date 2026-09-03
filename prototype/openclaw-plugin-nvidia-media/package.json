@@ -1,0 +1,11 @@
+{
+  "name": "@applied-ai-solutions/atlas-nvidia-media",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "openclaw": {
+    "extensions": ["./index.js"],
+    "compat": { "pluginApi": ">=2026.8.1" }
+  },
+  "peerDependencies": { "openclaw": ">=2026.8.1" }
+}

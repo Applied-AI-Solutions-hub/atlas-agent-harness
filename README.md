@@ -1,89 +1,67 @@
-# OpenClaw GPU Agent Harness
+# Atlas Agent Harness
 
 An open build by [Applied AI Solutions](https://appliedai.solutions) for running
-capable, private AI agents on hardware you control.
+a dependable business agent with private GPU compute, lean memory, governed
+tools, and visible results.
 
-The OpenClaw GPU Agent Harness turns a Windows workstation with an NVIDIA GPU
-into a dependable agent platform. It brings model inference, speech, images,
-communication, supervision, permissions, verification, and recovery together
-in one understandable system—without making a cloud model API the center of
-the product.
+Atlas keeps ordinary conversation fast and moves substantial work onto a
+durable work graph. The agent retrieves only the evidence and tools needed for
+the current task, while a private NVIDIA GPU remains warm for approved local
+workloads.
 
 ## What it does
 
-- Builds a reproducible OpenClaw environment on Windows with WSL2
-- Uses the onboard NVIDIA GPU for local AI workloads
-- Gives agents local language, speech-to-text, text-to-speech, image, OCR,
-  embedding, and reranking capabilities
-- Connects agents to Discord while keeping execution on the host
-- Separates the gateway, GPU workers, credentials, memory, and authoritative
-  world state
-- Applies explicit permissions, approval gates, resource limits, and audit
-  records to agent actions
-- Supervises services and recovers them when a process or model worker fails
-- Verifies hardware, configuration, model access, communication, and recovery
-  before reporting success
-- Produces secret-free receipts and recovery material for safer migration
+- Runs Atlas through an isolated OpenClaw gateway and Discord identity
+- Keeps the agent prompt lean with bounded, source-linked graph recall
+- Sends substantial work to an asynchronous, receipt-backed work graph
+- Keeps a measured NVIDIA Nemotron model resident on the private GPU
+- Enforces ownership, privacy, deadlines, concurrency, retry, and token limits
+- Delivers long answers as matching HTML and JSON reports
+- Records current progress, last success, completion, timeout, and failure
+- Keeps credentials and live machine state outside the repository
 
-## Why it helps
+## What it fixes
 
-Running a model is easy. Operating an agent that people can depend on is the
-hard part.
+Capable agents become slow and unreliable when every tool, memory, and worker is
+placed in every prompt. Atlas separates conversation from execution. Tools stay
+on a discoverable shelf, memory returns small evidence packets, GPU work runs
+outside Discord request timeouts, and every background result carries a
+verifiable receipt.
 
-This harness replaces fragile setup scripts and loosely connected tools with a
-repeatable operating environment. Local inference reduces recurring API
-dependence, keeps more data on the machine, and lets teams choose how their GPU
-is used. Workload limits prevent one image or voice job from silently exhausting
-the system. Visible checks make failures understandable. Recovery paths make
-the platform maintainable instead of disposable.
+## Verified testing build
 
-The result is an agent foundation that can grow from a private workstation into
-business and personal worlds without surrendering ownership of memory, policy,
-evidence, or data.
+- NVIDIA Nemotron Nano 9B v2 Q8 remained resident at 100% GPU with an 8K context
+- The sustained GPU gate passed 38 measured runs with no inference, timeout, or
+  thermal failures
+- The warm end-to-end work-graph canary completed in about two seconds
+- Memory, graph, routing, report, media, and turn-governor tests run without
+  external credentials
+- Atlas and the personal agent use separate identities, credentials, sessions,
+  and memory namespaces
 
-## Built for this workstation
+This is a testing build, not a finished one-click installer. Local speech,
+image generation, clean-machine installation, and private report hosting remain
+explicit promotion gates.
 
-The current development host combines an NVIDIA GeForce RTX 5060 Ti with
-16 GiB of VRAM, 32 GiB of system memory, and an AMD Ryzen 7 7800X3D. The first
-hardware preflight is working and confirms that the machine is ready for the
-GPU-native build. WSL2 and Ubuntu 24.04 are the next installation gates.
+Run the credential-free test suite with Node.js 24 or newer:
 
-## Build status
-
-The GPU-native edition currently includes read-only host detection and an
-approval-gated ten-stage installation plan. Hardware, storage, Windows, WSL,
-Ubuntu, version pins, GPU visibility, and VRAM are checked before the harness
-is allowed to change the host.
-
-Local model selection and worker limits will be set from measured quality,
-latency, and VRAM results on this machine rather than guessed in advance.
+```text
+npm test
+```
 
 ## Explore the build
 
 - [Roadmap](ROADMAP.md)
-- [Deployment design](prototype/DEPLOYMENT.md)
-- [Installer design](prototype/INSTALLER-DESIGN.md)
-- [NVIDIA capability layer](prototype/NVIDIA-CAPABILITY-LAYER.md)
-- [Local GPU architecture](prototype/local-workers/README.md)
-- [Migration gates](prototype/MIGRATION-GATES.md)
-- [Windows and WSL2 setup](prototype/windows/README.md)
-
-## Safe host preflight
-
-Detection and planning are read-only. They can run before approving any
-operating-system changes.
-
-```powershell
-.\harness-bootstrap.ps1 -Stage Detect
-.\harness-bootstrap.ps1 -Stage Plan -Json
-```
-
-The pinned `openclaw-install.ps1` package installer is a component of the
-harness, not its control plane. Later stages invoke components only after
-preflight, explicit approval, and rollback checks pass.
+- [System architecture](docs/ARCHITECTURE.md)
+- [Validation evidence](prototype/compute-pipeline/VALIDATION.md)
+- [Memory architecture](docs/memory-architecture-roadmap.md)
+- [Work graph](prototype/work-graph/ARCHITECTURE.md)
+- [Model promotion](prototype/home-gpu-worker/MODEL-PROMOTION.md)
+- [Atlas boot templates](agent/README.md)
+- [Learning log](docs/LEARNING-LOG.md)
 
 ## Security note
 
-Never commit Discord tokens, OpenClaw runtime state, private model data, or
-credential-bearing recovery archives. This project is structured to keep those
-materials outside version control.
+Never commit provider keys, Discord tokens, Gateway state, private documents,
+machine inventories, tailnet names, or credential-bearing recovery archives.
+The examples fail closed and require deployment-specific values at runtime.

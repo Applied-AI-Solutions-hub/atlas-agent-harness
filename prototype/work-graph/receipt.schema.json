@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://appliedai.solutions/schemas/work-graph-receipt-v1.json",
+  "title": "Applied AI work graph attempt receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "jobId", "attempt", "executor", "startedAt", "finishedAt", "outcome", "inputDigest", "usage", "artifacts"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "jobId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "attempt": { "type": "integer", "minimum": 1, "maximum": 3 },
+    "executor": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "runtime": { "type": "string", "maxLength": 160 },
+    "model": { "type": "string", "maxLength": 160 },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "finishedAt": { "type": "string", "format": "date-time" },
+    "outcome": { "enum": ["succeeded", "failed", "timed_out", "safety_stopped", "cancelled"] },
+    "inputDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "outputDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wallSeconds", "searches", "inputTokens", "outputTokens", "outputBytes"],
+      "properties": {
+        "wallSeconds": { "type": "number", "minimum": 0 },
+        "loadSeconds": { "type": "number", "minimum": 0 },
+        "promptEvalSeconds": { "type": "number", "minimum": 0 },
+        "generationSeconds": { "type": "number", "minimum": 0 },
+        "searches": { "type": "integer", "minimum": 0 },
+        "inputTokens": { "type": "integer", "minimum": 0 },
+        "outputTokens": { "type": "integer", "minimum": 0 },
+        "outputBytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "artifacts": { "type": "array", "maxItems": 100, "items": { "type": "string", "minLength": 1, "maxLength": 500 } },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": { "type": "string", "maxLength": 80 },
+        "message": { "type": "string", "maxLength": 1000 },
+        "retryable": { "type": "boolean" }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+[Unit]
+Description=Applied AI work-graph API
+After=network.target
+
+[Service]
+Type=simple
+Environment=WORK_GRAPH_HOST=127.0.0.1
+Environment=WORK_GRAPH_PORT=8792
+Environment=WORK_GRAPH_DB=%h/.local/share/applied-ai/work-graph.sqlite
+Environment=WORK_GRAPH_PRINCIPALS=%h/.config/work-graph/principals.json
+Environment=WORK_GRAPH_RESULTS=%h/workspace/results/work-graph
+ExecStart=/opt/node-v24.20.0-linux-x64/bin/node %h/workspace/infrastructure/work-graph/src/server.mjs
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.local/share/applied-ai %h/workspace/results/work-graph
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://appliedai.solutions/schemas/work-graph-job-v1.json",
+  "title": "Applied AI work graph job",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "namespace", "privacyClass", "owner", "requestedBy", "createdAt", "deadlineAt", "capability", "operation", "inputDigest", "budgets"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+    "namespace": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "privacyClass": { "enum": ["public", "personal", "personal-approved", "business-private", "business-approved"] },
+    "owner": { "enum": ["sparky", "atlas"] },
+    "requestedBy": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "deadlineAt": { "type": "string", "format": "date-time" },
+    "capability": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "operation": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "inputDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "inputRefs": { "type": "array", "maxItems": 100, "items": { "type": "string", "minLength": 1, "maxLength": 500 } },
+    "dependencies": { "type": "array", "uniqueItems": true, "maxItems": 100, "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" } },
+    "preferredExecutors": { "type": "array", "uniqueItems": true, "maxItems": 8, "items": { "enum": ["sparky", "atlas", "home-gpu", "memory-indexer", "nvidia-hosted"] } },
+    "parameters": { "type": "object" },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxAttempts", "maxWallSeconds", "maxSearches", "maxInputTokens", "maxOutputTokens", "maxOutputBytes"],
+      "properties": {
+        "maxAttempts": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "maxWallSeconds": { "type": "integer", "minimum": 1, "maximum": 7200 },
+        "maxSearches": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "maxInputTokens": { "type": "integer", "minimum": 0, "maximum": 200000 },
+        "maxOutputTokens": { "type": "integer", "minimum": 1, "maximum": 32000 },
+        "maxOutputBytes": { "type": "integer", "minimum": 1, "maximum": 104857600 }
+      }
+    }
+  }
+}

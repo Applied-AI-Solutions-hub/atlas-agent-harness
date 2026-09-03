@@ -1,0 +1,22 @@
+{
+  "id": "work-graph",
+  "name": "Applied AI Work Graph",
+  "description": "Submit substantial local GPU work asynchronously and read its receipt-backed status.",
+  "version": "0.1.5",
+  "activation": {
+    "onStartup": true
+  },
+  "contracts": {
+    "tools": ["work_submit", "work_status"]
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "baseUrl": { "type": "string", "default": "http://127.0.0.1:8792" },
+      "tokenFile": { "type": "string", "default": "/home/openclaw/.config/atlas-memory/tokens/atlas" },
+      "namespace": { "type": "string", "default": "business/applied-ai-solutions" },
+      "timeoutMs": { "type": "integer", "minimum": 100, "maximum": 5000, "default": 1500 }
+    }
+  }
+}

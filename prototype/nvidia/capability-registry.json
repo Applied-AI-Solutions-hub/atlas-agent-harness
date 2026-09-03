@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-02T00:08:00Z",
+  "provider": {
+    "id": "nvidia",
+    "hostedBaseUrl": "https://integrate.api.nvidia.com/v1",
+    "credentialRef": "NVIDIA_API_KEY"
+  },
+  "policies": {
+    "defaultTimeoutMs": 60000,
+    "maxAttempts": 2,
+    "promotionRequiresEvaluation": true,
+    "allowUnknownAccess": false
+  },
+  "models": [
+    {
+      "id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "label": "Nemotron 3.5 Lightning 30B A3B",
+      "access": "hosted",
+      "lifecycle": "validated",
+      "apiFamily": "chat-completions",
+      "modalities": { "input": ["text"], "output": ["text"] },
+      "capabilities": ["chat.fast", "tool.calling", "reasoning.standard"],
+      "features": { "streaming": true, "toolCalling": true, "structuredOutput": false },
+      "routes": { "production": true, "priority": 100 },
+      "evidence": { "validatedAt": "2026-09-01T00:00:00Z", "source": "live-gateway-probe" }
+    },
+    {
+      "id": "nvidia/nemotron-3-super-120b-a12b",
+      "label": "Nemotron 3 Super 120B A12B",
+      "access": "hosted",
+      "lifecycle": "candidate",
+      "apiFamily": "chat-completions",
+      "modalities": { "input": ["text"], "output": ["text"] },
+      "capabilities": ["reasoning.complex", "tool.calling"],
+      "features": { "streaming": true, "toolCalling": true, "structuredOutput": false },
+      "routes": { "production": false, "priority": 50 },
+      "evidence": {
+        "accessValidatedAt": "2026-09-02T00:08:00Z",
+        "source": "live-gateway-probe",
+        "expectedOutput": "SUPER_OK",
+        "observedOutput": "SUPER_OK",
+        "latencyMs": 2297
+      }
+    },
+    {
+      "id": "nvidia/nemotron-3-ultra-550b-a55b",
+      "label": "Nemotron 3 Ultra 550B A55B",
+      "access": "hosted",
+      "lifecycle": "candidate",
+      "apiFamily": "chat-completions",
+      "modalities": { "input": ["text"], "output": ["text"] },
+      "capabilities": ["reasoning.critical"],
+      "features": { "streaming": true, "toolCalling": true, "structuredOutput": false },
+      "routes": { "production": false, "priority": 10 },
+      "evidence": {
+        "accessValidatedAt": "2026-09-02T00:08:00Z",
+        "source": "live-gateway-probe",
+        "expectedOutput": "ULTRA_OK",
+        "observedOutput": "ULTRA_OK",
+        "latencyMs": 23165
+      }
+    },
+    {
+      "id": "meta/muse-glimmer-30b",
+      "label": "Muse Glimmer 30B",
+      "access": "hosted",
+      "lifecycle": "candidate",
+      "apiFamily": "chat-completions",
+      "modalities": { "input": ["text", "image"], "output": ["text"] },
+      "capabilities": ["vision.general", "vision.document"],
+      "features": { "streaming": true, "toolCalling": false, "structuredOutput": false },
+      "routes": { "production": false, "priority": 50 },
+      "evidence": { "source": "configured-openclaw-image-route", "liveTaskValidation": "pending" }
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "label": "Nemotron 3 Nano Omni 30B A3B Reasoning",
+      "access": "hosted",
+      "lifecycle": "candidate",
+      "apiFamily": "chat-completions",
+      "modalities": { "input": ["text", "image"], "output": ["text"] },
+      "capabilities": ["vision.general", "vision.document"],
+      "features": { "streaming": true, "toolCalling": true, "structuredOutput": false },
+      "routes": { "production": false, "priority": 25 },
+      "evidence": { "source": "configured-openclaw-image-fallback", "liveTaskValidation": "pending" }
+    }
+  ],
+  "routes": [
+    {
+      "capability": "chat.fast",
+      "qualityGate": "chat-fast-v1",
+      "candidates": ["nvidia/nemotron-3.5-lightning-30b-a3b"]
+    },
+    {
+      "capability": "reasoning.standard",
+      "qualityGate": "chat-fast-v1",
+      "candidates": ["nvidia/nemotron-3.5-lightning-30b-a3b"]
+    },
+    {
+      "capability": "reasoning.complex",
+      "qualityGate": "reasoning-complex-v1",
+      "candidates": ["nvidia/nemotron-3-super-120b-a12b"]
+    },
+    {
+      "capability": "reasoning.critical",
+      "qualityGate": "reasoning-critical-v1",
+      "candidates": ["nvidia/nemotron-3-ultra-550b-a55b"]
+    },
+    {
+      "capability": "vision.general",
+      "qualityGate": "vision-general-v1",
+      "candidates": [
+        "meta/muse-glimmer-30b",
+        "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning"
+      ]
+    },
+    {
+      "capability": "vision.document",
+      "qualityGate": "vision-document-v1",
+      "candidates": [
+        "meta/muse-glimmer-30b",
+        "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning"
+      ]
+    }
+  ]
+}

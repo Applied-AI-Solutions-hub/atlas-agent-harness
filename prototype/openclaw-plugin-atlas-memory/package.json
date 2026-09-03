@@ -1,0 +1,14 @@
+{
+  "name": "@applied-ai-solutions/atlas-memory-openclaw",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Bounded read-only retrieval from the shared Atlas memory service.",
+  "files": ["index.js", "client.js", "openclaw.plugin.json"],
+  "scripts": { "test": "node --test test/*.test.js" },
+  "openclaw": {
+    "extensions": ["./index.js"],
+    "compat": { "pluginApi": ">=2026.8.1", "minGatewayVersion": "2026.8.1" }
+  },
+  "peerDependencies": { "openclaw": ">=2026.8.1" }
+}

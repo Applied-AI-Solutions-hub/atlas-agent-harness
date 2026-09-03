@@ -1,0 +1,9 @@
+{
+  "wsl": "2.7.12",
+  "distribution": "Ubuntu-24.04",
+  "ubuntu": "24.04 LTS",
+  "node": "24.20.0",
+  "openclaw": "2026.8.1",
+  "openclaw_npm_integrity": "sha512-bSaFeaDFnQH/bU1vgKMac6eHkHHPHG0C/uwduXGI3eIS3lyiYSwmDU5ehhBUUhlPeV85tL5/KVwmoH48nX1tWw==",
+  "openclaw_installer_sha256": "29542688851e829c03eac6a85ed4205fe4379fdc79fb7dc20d08f6b05fea280d"
+}

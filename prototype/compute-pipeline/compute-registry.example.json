@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-02T05:01:00Z",
+  "workers": {
+    "home-gpu": {
+      "kind": "private",
+      "node": "home-compute",
+      "transport": "tailscale",
+      "healthEndpoint": "/v1/health/ready",
+      "metricsEndpoint": "/v1/metrics",
+      "status": "pending-inventory",
+      "privacyClasses": ["public", "personal", "business-private"],
+      "capabilities": [],
+      "models": [],
+      "limits": {
+        "maxConcurrentJobs": 1,
+        "maxJobSeconds": 900,
+        "maxRetries": 1
+      },
+      "cost": {
+        "class": "local",
+        "weight": 0
+      }
+    },
+    "nvidia-build": {
+      "kind": "hosted",
+      "provider": "nvidia",
+      "transport": "https",
+      "status": "configured",
+      "privacyClasses": ["public", "personal-approved", "business-approved"],
+      "capabilities": [
+        "reasoning",
+        "vision",
+        "speech-to-text",
+        "text-to-speech",
+        "image-generation"
+      ],
+      "secretRef": "nvidia:default",
+      "limits": {
+        "maxConcurrentJobs": 1,
+        "maxJobSeconds": 600,
+        "maxRetries": 1
+      },
+      "cost": {
+        "class": "metered",
+        "weight": 10
+      }
+    }
+  },
+  "routingPolicy": {
+    "prefer": ["privacy", "capability", "health", "quality", "locality", "latency", "cost"],
+    "requireHealthyWorker": true,
+    "discloseFallback": true,
+    "denyUnclassifiedData": true,
+    "loopProtection": {
+      "maxRepeatedEquivalentCalls": 2,
+      "maxWorkerSelectionsPerJob": 3
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "taskAccuracy": 0,
+  "ocrAccuracy": 0,
+  "hallucinationRate": 1,
+  "p95LatencyMs": 999999
+}

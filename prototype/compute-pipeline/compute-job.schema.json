@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://appliedai.solutions/schemas/atlas-compute-job-v1.json",
+  "title": "Atlas compute job",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "capability",
+    "operation",
+    "privacyClass",
+    "inputDigest",
+    "deadlineSeconds",
+    "budgets"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+    "capability": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "operation": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "privacyClass": {
+      "enum": ["public", "personal", "personal-approved", "business-private", "business-approved"]
+    },
+    "inputDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "payload": { "description": "Opaque input supplied only to the selected authorized worker." },
+    "parameters": { "type": "object" },
+    "deadlineSeconds": { "type": "integer", "minimum": 1, "maximum": 3600 },
+    "maxCostWeight": { "type": "number", "minimum": 0 },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxAttempts", "maxOutputBytes"],
+      "properties": {
+        "maxAttempts": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "maxOutputBytes": { "type": "integer", "minimum": 1, "maximum": 104857600 }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "atlas-home-compute",
+  "activation": {
+    "onStartup": true
+  },
+  "name": "Atlas Home Compute",
+  "description": "Bounded private compute capabilities for an approved Atlas home node.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean",
+        "default": true
+      }
+    }
+  },
+  "uiHints": {
+    "enabled": {
+      "label": "Home compute commands",
+      "help": "Advertise bounded home-compute commands from this Linux node host."
+    }
+  }
+}

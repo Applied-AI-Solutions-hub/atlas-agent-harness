@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "gates": [
+    {
+      "id": "chat-fast-v1",
+      "metrics": {
+        "taskAccuracy": { "operator": ">=", "value": 0.9 },
+        "toolArgumentValidity": { "operator": ">=", "value": 0.95 },
+        "hallucinationRate": { "operator": "<=", "value": 0.02 },
+        "p95LatencyMs": { "operator": "<=", "value": 12000 }
+      }
+    },
+    {
+      "id": "vision-general-v1",
+      "metrics": {
+        "taskAccuracy": { "operator": ">=", "value": 0.92 },
+        "ocrAccuracy": { "operator": ">=", "value": 0.95 },
+        "hallucinationRate": { "operator": "<=", "value": 0.01 },
+        "p95LatencyMs": { "operator": "<=", "value": 20000 }
+      }
+    },
+    {
+      "id": "vision-document-v1",
+      "metrics": {
+        "taskAccuracy": { "operator": ">=", "value": 0.92 },
+        "ocrAccuracy": { "operator": ">=", "value": 0.97 },
+        "citationGrounding": { "operator": ">=", "value": 0.95 },
+        "hallucinationRate": { "operator": "<=", "value": 0.01 },
+        "p95LatencyMs": { "operator": "<=", "value": 30000 }
+      }
+    },
+    {
+      "id": "reasoning-complex-v1",
+      "metrics": {
+        "taskSuccess": { "operator": ">=", "value": 0.9 },
+        "toolArgumentValidity": { "operator": ">=", "value": 0.98 },
+        "sourceGrounding": { "operator": ">=", "value": 0.95 },
+        "hallucinationRate": { "operator": "<=", "value": 0.01 },
+        "p95LatencyMs": { "operator": "<=", "value": 45000 }
+      }
+    },
+    {
+      "id": "reasoning-critical-v1",
+      "metrics": {
+        "taskSuccess": { "operator": ">=", "value": 0.95 },
+        "toolArgumentValidity": { "operator": ">=", "value": 0.99 },
+        "sourceGrounding": { "operator": ">=", "value": 0.98 },
+        "hallucinationRate": { "operator": "<=", "value": 0.005 },
+        "p95LatencyMs": { "operator": "<=", "value": 90000 }
+      }
+    }
+  ]
+}

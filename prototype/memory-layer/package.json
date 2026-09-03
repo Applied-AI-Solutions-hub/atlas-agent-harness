@@ -1,0 +1,14 @@
+{
+  "name": "@applied-ai-solutions/atlas-memory",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Lean, evidence-linked memory service shared by Sparky and Atlas.",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

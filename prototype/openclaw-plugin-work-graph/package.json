@@ -1,0 +1,14 @@
+{
+  "name": "@applied-ai-solutions/work-graph-openclaw",
+  "version": "0.1.5",
+  "private": true,
+  "type": "module",
+  "description": "Bounded asynchronous work submission and status for Atlas.",
+  "files": ["index.bundle.js", "openclaw.plugin.json"],
+  "scripts": { "test": "node --test test/*.test.js" },
+  "openclaw": {
+    "extensions": ["./index.bundle.js"],
+    "compat": { "pluginApi": ">=2026.8.1", "minGatewayVersion": "2026.8.1" }
+  },
+  "peerDependencies": { "openclaw": ">=2026.8.1" }
+}

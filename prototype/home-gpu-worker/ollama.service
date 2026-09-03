@@ -1,0 +1,25 @@
+[Unit]
+Description=Applied AI local GPU model runtime
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment=OLLAMA_HOST=127.0.0.1:11434
+Environment=OLLAMA_MODELS=%h/.local/share/ollama/models
+Environment=OLLAMA_MAX_LOADED_MODELS=1
+Environment=OLLAMA_NUM_PARALLEL=1
+Environment=OLLAMA_KEEP_ALIVE=-1
+Environment=OLLAMA_NO_CLOUD=1
+ExecStart=%h/.local/bin/ollama serve
+ExecStartPost=/opt/node-v24.20.0-linux-x64/bin/node %h/workspace/infrastructure/home-gpu-worker/preload-model.mjs
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.local/share/ollama %h/.ollama
+
+[Install]
+WantedBy=default.target

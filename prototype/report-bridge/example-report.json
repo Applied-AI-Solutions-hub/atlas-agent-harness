@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "title": "Home compute pipeline readiness",
+  "status": "Partial",
+  "privacyClass": "personal",
+  "summary": [
+    "The home PC passed its Linux and GPU prerequisite gate. Ubuntu 24.04 is running under WSL2, systemd is active, and the RTX 5060 Ti is visible with 16 GB of VRAM.",
+    "The next controlled step is pairing an unprivileged OpenClaw session host. Local models and container tooling remain intentionally uninstalled until that connection is verified."
+  ],
+  "execution": {
+    "currentAction": "Pairing the restricted home OpenClaw node",
+    "lastSuccess": "Validated Ubuntu 24.04, systemd, and GPU visibility",
+    "worker": "home-compute / NVIDIA GPU",
+    "fallbackUsed": false
+  },
+  "sections": [
+    {
+      "heading": "What passed",
+      "blocks": [
+        {
+          "type": "bullets",
+          "items": [
+            "Ubuntu 24.04.4 LTS is installed as a WSL2 distribution.",
+            "systemd reports a running state.",
+            "NVIDIA reports an RTX 5060 Ti with 16,311 MiB of VRAM and driver 595.79.",
+            "No model, container runtime, API credential, or public listener was installed during this gate."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Why this architecture matters",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Atlas can keep conversation responsive while treating the resident GPU as a private, discoverable capability. Work reaches the GPU only when the task and privacy policy allow it; hosted NVIDIA endpoints remain available for approved fallback paths.",
+          "sourceIds": ["openclaw-connect", "tailscale-serve"]
+        }
+      ]
+    },
+    {
+      "heading": "Next acceptance gate",
+      "blocks": [
+        {
+          "type": "bullets",
+          "items": [
+            "Node.js and OpenClaw match the pinned planner versions.",
+            "The home node establishes an outbound connection through private Tailscale Serve.",
+            "The gateway reports the node online with session-host capability.",
+            "The executor returns a no-secrets readiness artifact and stops."
+          ],
+          "sourceIds": ["openclaw-connect"]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "openclaw-connect",
+      "title": "OpenClaw connect command",
+      "url": "https://docs.openclaw.ai/cli/connect",
+      "publisher": "OpenClaw"
+    },
+    {
+      "id": "tailscale-serve",
+      "title": "Tailscale Serve",
+      "url": "https://tailscale.com/kb/1242/tailscale-serve",
+      "publisher": "Tailscale"
+    }
+  ]
+}

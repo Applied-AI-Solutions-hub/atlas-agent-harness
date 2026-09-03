@@ -1,0 +1,13 @@
+{
+  "name": "@applied-ai-solutions/atlas-agent-harness",
+  "version": "0.1.0-testing.1",
+  "private": true,
+  "type": "module",
+  "description": "GPU-native business agent harness with bounded memory, tools, work, and delivery.",
+  "scripts": {
+    "test": "node scripts/run-tests.mjs"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

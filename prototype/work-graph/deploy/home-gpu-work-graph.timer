@@ -1,0 +1,11 @@
+[Unit]
+Description=Poll the Applied AI work graph for Home GPU jobs
+
+[Timer]
+OnBootSec=5
+OnUnitActiveSec=2
+AccuracySec=1
+Unit=home-gpu-work-graph.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,22 @@
+{
+  "principals": [
+    {
+      "id": "sparky",
+      "tokenSha256": "replace-with-sha256-of-a-random-token",
+      "actions": ["search"],
+      "namespaces": ["personal/owner", "agent/sparky", "public"]
+    },
+    {
+      "id": "atlas",
+      "tokenSha256": "replace-with-sha256-of-a-different-random-token",
+      "actions": ["search"],
+      "namespaces": ["business/applied-ai-solutions", "agent/atlas", "public"]
+    },
+    {
+      "id": "memory-indexer",
+      "tokenSha256": "replace-with-sha256-of-a-third-random-token",
+      "actions": ["search", "ingest", "graph.write"],
+      "namespaces": ["personal/*", "business/*", "agent/*", "public"]
+    }
+  ]
+}
